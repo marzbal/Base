@@ -52,3 +52,39 @@ contract EmployeeStorage {
         shares = 1000; // Reset shares to 1000
     }
 }
+
+
+
+
+
+
+
+.
+.
+..
+
+
+
+    // Function to grant additional shares to the employee
+    function grantShares(uint16 _newShares) public {
+        // Check if the requested shares exceed the limit
+        if (_newShares > 5000) {
+            revert("Too many shares"); // Revert with error message
+        } else if (shares + _newShares > 5000) {
+            revert TooManyShares(shares + _newShares); // Revert with custom error message
+        }
+        shares += _newShares; // Grant the new shares
+    }
+
+    // Function used for testing packing of storage variables (not relevant to main functionality)
+    function checkForPacking(uint _slot) public view returns (uint r) {
+        assembly {
+            r := sload (_slot)
+        }
+    }
+
+    // Function to reset shares for debugging purposes (not relevant to main functionality)
+    function debugResetShares() public {
+        shares = 1000; // Reset shares to 1000
+    }
+}
